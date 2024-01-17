@@ -1,0 +1,106 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Thông Tin Vé Đã Đặt</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Tên Chuyến Bay</th>
+            <th scope="col">Ngày đi</th>
+            <th scope="col">Hạng Ghế</th>
+            <th scope="col">Số Ghế</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tk_info in tk %}
+        {% if tk_info.thongtintaikhoan_id == current_user.id %}
+        <tr>
+            <td>
+                {% for cb_info in cb %}
+                {% if cb_info.id == tk_info.chuyenbay_id %}
+                {% for tb_info in tb %}
+                {% if tb_info.id == cb_info.tuyenbay_id%}
+                {{ tb_info.name }}
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for cb_info in cb %}
+                {% if cb_info.id == tk_info.chuyenbay_id%}
+                {{ cb_info.ngaybay }}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for ghe_info in ghe %}
+                {% if ghe_info.id == tk_info.ghe_id %}
+                {{ ghe_info.hangghe_id}}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for ghe_info in ghe %}
+                {% if ghe_info.id == tk_info.ghe_id %}
+                {{ ghe_info.name }}
+                {% endif %}
+                {% endfor %}
+            </td>
+
+            <td>
+                <button class="btn btn-danger" onclick="huyVe({{ tk_info.id }})">Hủy Vé</button>
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function huyVe(id) {
+        // Hiển thị hộp thoại xác nhận
+        var xacNhan = confirm("Bạn có chắc chắn muốn hủy vé không?");
+        if (!xacNhan) {
+            return; // Nếu người dùng không xác nhận, thoát khỏi hàm
+        }
+
+        fetch('/huy-ve', {
+            method: "post",
+            body: JSON.stringify({
+                "id": id,
+            }),
+            headers: {
+                'Content-Type': "application/json"
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            window.location.reload();
+            alert('Đã hủy vé thành công!');
+        })
+    }
+</script>
+
+<!--<script>-->
+<!--    function huyVe(id) {-->
+<!--        fetch('/huy-ve', {-->
+<!--        method: "post",-->
+<!--        body: JSON.stringify({-->
+<!--            "id": id,-->
+<!--        }),-->
+<!--        headers: {-->
+<!--            'Content-Type': "application/json"-->
+<!--        }-->
+<!--    }).then(function (res) {-->
+<!--        return res.json();-->
+
+<!--    }).then(function (data) {-->
+<!--        window.location.reload();-->
+<!--        alert('Đã xóa vé thành công!');-->
+<!--    })-->
+<!--}-->
+<!--</script>-->
+{% endblock %}

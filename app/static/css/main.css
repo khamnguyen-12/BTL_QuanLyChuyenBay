@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.card{
+    margin: 0px auto;
+    flex: 0 0 23%;
+    max-width: 25%;
+    padding: 15px
+}
+.card-title{
+height: 50%;
+}

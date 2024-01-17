@@ -1,0 +1,62 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+        body {
+            font-family: "Montserrat", sans-serif;
+        }
+        .container {
+             margin: 0;
+             padding: 0;
+        }
+        .main-container {
+            position: relative;
+            max-width: 110%;
+
+        }
+
+        .main-container img {
+            width: 110%;
+        }
+
+        .main-container p {
+            text-align: center;
+            position: absolute;
+            top: 15%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+            font-size: 35px;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            width: 60%;
+        }
+</style>
+<section class="container">
+
+<div class="container">
+        <div class="main-container">
+        <img src="https://www.vietnamairlines.com/~/media/ContentImage/TravelInfo/ChuyenBayMoUoc.jpg?la=en" alt="Mô tả ảnh">
+            <p>CHÀO MỪNG ĐẾN VỚI JUSTFLY.
+            NƠI MÀ HÀNH TRÌNH CỦA BẠN BẮT ĐẦU!</p>
+        </div>
+</div>
+<div class="row">
+    {% for p in flighttickets %}
+    <div class="col-xs-12 col-md-3" style="padding: 8px;">
+        <div class="card">
+            <img class="card-img-top" src="{{p.image}}" alt="Card image">
+            <div class="card-body">
+                <h4 class="card-title">{{p.name}}</h4>
+                <p class="card-text">{{"{:,.0f}".format(p.price)}} VND</p>
+                <a href="/flighttickets/{{p.id}}" class="btn btn-primary">Xem chi tiết</a>
+                <a href="#" class="btn btn-danger" onclick="addToCart({{p.id}}, '{{p.name}}', {{p.price}})" >Đặt hàng</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<style>
+    form {
+    border: 1px solid #ddd; /* Màu và độ dày của đường viền */
+    border-radius: 5px; /* Độ cong của góc, bạn có thể điều chỉnh nếu cần thiết */
+    padding: 15px; /* Khoảng cách giữa nội dung và đường viền */
+    max-width: 400px; /* Độ rộng tối đa của biểu mẫu */
+    margin: auto; /* Canh giữa biểu mẫu */
+    }
+</style>
+<h1 class="text-center text-info mt-3 mb-3">ĐĂNG NHẬP NGƯỜI DÙNG</h1>
+
+<form method="post" action="">
+    <div class="mb-3 mt-3">
+        <label for="username" class="form-label">Tên đăng nhập:</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Tên đăng nhập">
+    </div>
+    <div class="mb-3">
+        <label for="pwd" class="form-label">Mật khẩu:</label>
+        <input type="password" class="form-control" id="pwd" name="password" placeholder="Mật khẩu">
+    </div>
+
+    <div class=" mt-3 mb-3 d-flex justify-content-around" >
+         <button type="submit" class="btn btn-primary">Đăng nhập</button>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/register'">Đăng ký</button>
+    </div>
+</form>
+{% endblock %}

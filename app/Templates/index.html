@@ -1,0 +1,73 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<h2 class="text-center text-uppercase mt-5">Danh Sách Chuyến Bay</h2>
+
+  <style>
+    /* Thiết lập CSS để căn chỉnh giao diện */
+    #search-container {
+      text-align: center;
+      margin: 20px;
+    }
+
+    #search-input {
+      padding: 8px;
+      width: 200px;
+    }
+
+    #search-button {
+      padding: 8px;
+    }
+    .card-img-top {
+    height: 200px; /* Đặt chiều cao tùy chọn */
+    object-fit: cover; /* Đảm bảo hình ảnh không bị méo khi căn chỉnh kích thước */
+
+    .card-body {
+    height: 150px; /* Đặt chiều cao tùy chọn */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    }
+
+    .btn-danger {
+    display: block;
+    margin: auto; /* Căn giữa theo chiều ngang */
+    }
+  </style>
+<section class="container">
+    <ul class="pagination mt-1">
+        <!--        {% for i in range(pages) %}-->
+        <!--        <li class="page-item"><a class="page-link" href="/?page={{ i + 1 }}">{{ i + 1 }}</a></li>-->
+        <!--        {% endfor %}-->
+    </ul>
+    <div id="search-container" method="get" action="/">
+        <input type="text" id="search-input" placeholder="Nhập từ khóa">
+        <button id="search-button" type="submit" >Tìm kiếm</button>
+    </div>
+    <div class="row">
+        {% for p in data %}
+        <div class="col-xs-10 col-md-3" style="padding: 5px;">
+            <div class="card">
+                <img class="card-img-top" src="{{ p[1].image }}" alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title">Từ {{p[0].diemdi}} đến {{p[0].diemden}}</h4>
+                    <!--                    <p class="card-text">{{p[0].name}}</p>-->
+                    <p class="card-text">Ngày-giờ bay: {{p[1].ngaybay}}</p>
+                    <p class="card-text">Vé hạng {{p[2].hangghe_id}}: {{ "{:,.0f}".format(p[2].giave | default(0)) }}
+                        VNĐ</p>
+                    <a href="/choose_chair/{{p[1].id}}/{{p[2].hangghe_id}}" class="btn btn-danger">Đặt vé</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<script>
+    document.getElementById("search-button").addEventListener("click", function() {
+        var keyword = document.getElementById("search-input").value;
+        window.location.href = "/index?kw=" + encodeURIComponent(keyword);
+    });
+</script>
+
+
+{% endblock %}

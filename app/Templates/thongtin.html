@@ -1,0 +1,35 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<h1 class="text-center text-info mt-1">THÔNG TIN NGƯỜI DÙNG</h1>
+
+{% if err_msg %}
+<div class="alert alert-danger">
+    {{ err_msg }}
+</div>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data" action="">
+    <div class="mb-3 mt-3">
+        <label for="name" class="form-label">Tên người dùng:</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Tên người dùng">
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="diachi" class="form-label">Địa chỉ:</label>
+        <input type="text" class="form-control" id="diachi" name="diachi" placeholder="Địa chỉ">
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="sdt" class="form-label">Số điện thoại:</label>
+        <input type="text" class="form-control" id="sdt" name="sdt" placeholder="Số điện thoại">
+    </div>
+     <div class="mb-3 mt-3">
+        <label for="cmnd" class="form-label">Căn cứơc công dân:</label>
+        <input type="text" class="form-control" id="cmnd" name="cmnd" placeholder="Căn cước công dân">
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="mail" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="mail" name="mail" placeholder="Email">
+    </div>
+    <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+</form>
+{% endblock %}
