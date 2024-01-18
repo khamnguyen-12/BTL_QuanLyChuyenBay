@@ -9,13 +9,17 @@ from sqlalchemy import func
 #     GiaVe).all()
 #     return non_class_ChuyenBay
 
-def load_chuyenbay(kw=None):
+def load_chuyenbay(kw=None, ngaybay=None):
     products = db.session.query(TuyenBay, ChuyenBay, GiaVe).select_from(ChuyenBay).join(TuyenBay).join(
         GiaVe).all()
 
     if kw:
         kw_lower = kw.lower()
         products = [p for p in products if kw_lower in p[1].name.lower()]
+    # if ngaybay:
+    #     # Chuyển đổi ngày bay từ chuỗi sang đối tượng datetime
+    #     ngay_bay_date = datetime.strptime(ngaybay, "%Y-%m-%d").date()
+    #     products = [p for p in products if ngay_bay_date == p[3].ngaybay.date()]
 
     return products
 

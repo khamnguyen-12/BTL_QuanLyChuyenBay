@@ -80,7 +80,7 @@ class GiaVe(db.Model):
     __tablename__ = 'giave'
     hangghe_id = Column(Integer, ForeignKey('hangghe.id'), primary_key=True)
     tuyenbay_id = Column(Integer, ForeignKey('tuyenbay.id'), primary_key=True)
-    giave = Column(Float,default=0)
+    giave = Column(Float,default=1000)
 class HangGhe(BaseModel):
     __tablename__ = 'hangghe'
     name = Column(String(50), nullable=False)

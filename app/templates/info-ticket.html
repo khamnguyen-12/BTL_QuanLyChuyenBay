@@ -10,6 +10,7 @@
             <th scope="col">Ngày đi</th>
             <th scope="col">Hạng Ghế</th>
             <th scope="col">Số Ghế</th>
+<!--            <th scope="col">Giá vé</th>-->
         </tr>
         </thead>
         <tbody>
@@ -38,6 +39,13 @@
                 {% for ghe_info in ghe %}
                 {% if ghe_info.id == tk_info.ghe_id %}
                 {{ ghe_info.hangghe_id}}
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for giave_info in giave %}
+                {% if giave_info.id == tk_info.giave_id %}
+                {{ giave_info.giave }}
                 {% endif %}
                 {% endfor %}
             </td>
